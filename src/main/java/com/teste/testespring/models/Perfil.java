@@ -31,6 +31,5 @@ public class Perfil {
     private String nome_perfil;
 
     @Column(nullable = false)
-    @NotBlank(message = "O campo precisa ser preenchido.")
     private Boolean ativo;
 }
