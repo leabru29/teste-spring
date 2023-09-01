@@ -7,7 +7,7 @@ import com.teste.testespring.models.Usuario;
 public interface UsuarioService {
     Usuario createUsuario(Usuario usuario);
 
-    Usuario getUsuario(UUID id);
+    Usuario findByIdUsuario(UUID id);
 
     List<Usuario> listUsuarios();
 

@@ -48,7 +48,13 @@ public class PerfilServiceImpl implements PerfilService {
 
     @Override
     public void deletePerfil(Long id) {
-        perfilRepository.deleteById(id);
+        findByIdPerfil(id);
+        try {
+            perfilRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "Não foi possível deletar o Perfil pois o mesmo está vinculado a algum usuário.");
+        }
     }
 
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,7 @@ public class Usuario {
     private String sobrenome;
 
     @Column(name = "email", length = 100, nullable = false, unique = true)
+    @Email(message = "Por favor, preencha um E-mail válido.")
     @NotBlank(message = "Por favor preencha o campo E-mail")
     @Size(min = 3, max = 100, message = "O campo E-mail precisa de no mínimo 3 caracteres e no máximo 60 caracteres.")
     private String email;
