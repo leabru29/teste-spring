@@ -38,8 +38,7 @@ public class PerfilServiceImpl implements PerfilService {
 
     @Transactional
     public Perfil updatePerfil(Perfil perfil) {
-        Perfil existePerfil = perfilRepository.findById(perfil.getId())
-                .orElseThrow(() -> new RuntimeException("Perfil não encontrado."));
+        Perfil existePerfil = findByIdPerfil(perfil.getId());
         existePerfil.setNome_perfil(perfil.getNome_perfil());
         existePerfil.setAtivo(perfil.getAtivo());
         Perfil updatePerfil = perfilRepository.save(existePerfil);
