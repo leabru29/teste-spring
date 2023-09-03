@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.teste.testespring.models.Perfil;
 import com.teste.testespring.repositories.PerfilRepository;
 import com.teste.testespring.services.contracts.PerfilService;
+import com.teste.testespring.services.exceptions.EntityNotFoundException;
 
 import jakarta.transaction.Transactional;
 
@@ -32,7 +33,7 @@ public class PerfilServiceImpl implements PerfilService {
     @Override
     public Perfil findByIdPerfil(Long id) {
         Optional<Perfil> perfil = perfilRepository.findById(id);
-        return perfil.orElseThrow(() -> new RuntimeException("Perfil não encontrado."));
+        return perfil.orElseThrow(() -> new EntityNotFoundException("Perfil não encontrado."));
     }
 
     @Transactional

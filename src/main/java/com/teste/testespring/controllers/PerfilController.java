@@ -39,7 +39,7 @@ public class PerfilController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Perfil> getPerfil(@PathVariable Long id) {
         Perfil perfil = perfilServiceImpl.findByIdPerfil(id);
-        return new ResponseEntity<>(perfil, HttpStatus.OK);
+        return ResponseEntity.ok().body(perfil);
     }
 
     @PutMapping(value = "/{id}")
