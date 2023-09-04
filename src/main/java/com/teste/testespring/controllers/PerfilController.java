@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.teste.testespring.models.Perfil;
 import com.teste.testespring.services.PerfilServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/perfil")
 public class PerfilController {
@@ -25,7 +27,7 @@ public class PerfilController {
     private PerfilServiceImpl perfilServiceImpl;
 
     @PostMapping
-    public ResponseEntity<Perfil> createPerfil(@RequestBody Perfil perfil) {
+    public ResponseEntity<Perfil> createPerfil(@Valid @RequestBody Perfil perfil) {
         Perfil novoPerfil = perfilServiceImpl.createPerfil(perfil);
         return new ResponseEntity<>(novoPerfil, HttpStatus.CREATED);
     }
