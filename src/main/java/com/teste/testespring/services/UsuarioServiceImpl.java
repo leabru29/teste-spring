@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +27,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario createUsuario(Usuario usuario) {
         Perfil perfil = perfilServiceImpl.findByIdPerfil(usuario.getPerfil().getId());
         usuario.setId(null);
+        String senhaCriptografada = encriptedPasswdUsuario(usuario.getSenha());
+        usuario.setSenha(senhaCriptografada);
         usuario.setPerfil(perfil);
+
         return usuarioRepository.save(usuario);
+    }
+
+    private String encriptedPasswdUsuario(String passwd) {
+        String encriptedPassword = new BCryptPasswordEncoder().encode(passwd);
+        return encriptedPassword;
     }
 
     @Override
@@ -45,10 +54,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario updateUsuario(Usuario usuario) {
         Usuario existeUsuario = findByIdUsuario(usuario.getId());
         Perfil perfil = perfilServiceImpl.findByIdPerfil(usuario.getPerfil().getId());
+        String senhaCriptografada = encriptedPasswdUsuario(usuario.getSenha());
         existeUsuario.setNome(usuario.getNome());
         existeUsuario.setSobrenome(usuario.getSobrenome());
         existeUsuario.setEmail(usuario.getEmail());
-        existeUsuario.setSenha(usuario.getSenha());
+        existeUsuario.setSenha(senhaCriptografada);
         existeUsuario.setPerfil(perfil);
         Usuario updateUsuario = usuarioRepository.save(existeUsuario);
         return updateUsuario;
