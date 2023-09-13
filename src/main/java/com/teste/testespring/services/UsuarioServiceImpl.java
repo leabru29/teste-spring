@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.teste.testespring.models.Perfil;
+import com.teste.testespring.models.UserRole;
 import com.teste.testespring.models.Usuario;
 import com.teste.testespring.repositories.UsuarioRepository;
 import com.teste.testespring.services.contracts.UsuarioService;
@@ -25,11 +26,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Transactional
     public Usuario createUsuario(Usuario usuario) {
+
         Perfil perfil = perfilServiceImpl.findByIdPerfil(usuario.getPerfil().getId());
+
+        UserRole role = usuario.getRole();
+
         usuario.setId(null);
+
         String senhaCriptografada = encriptedPasswdUsuario(usuario.getSenha());
+
         usuario.setSenha(senhaCriptografada);
+
         usuario.setPerfil(perfil);
+
+        usuario.setRole(role);
 
         return usuarioRepository.save(usuario);
     }
