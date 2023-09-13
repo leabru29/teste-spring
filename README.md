@@ -4,7 +4,7 @@ Projeto Teste Spring Boot
 
 ## Descrição
 
-Este projeto tem como finalizade apenas testar os recursos do Spring Boot.
+Este projeto tem como finalidade apenas testar os recursos do Spring Boot.
 
 ## Tecnologias Utilizadas
 
